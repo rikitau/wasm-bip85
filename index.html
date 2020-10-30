@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<style>
+body{
+	display: flex;
+	flex-direction: column;
+}
+input[type="text"]{
+	max-width: 800px;
+}
+input[type="number"]{
+	max-width: 100px;
+}
+input{
+	padding: 10px 5px;
+	margin: 10px 0;
+}
+</style>
+</head>
+<body>
+	<h1>BIP-85 entropy from extended private key</h1>
+	<input type="text" id="xprv" placeholder="Enter your xprv"/>
+	<input type="number" id="index" value="0"/>
+	<div id="wif"></div>
+
+
+<script type="module">
+import init from './pkg/wasm_bip85.js';
+
+async function run() {
+	await init();
+}
+
+run();
+</script>
+</body>
+</html>
+

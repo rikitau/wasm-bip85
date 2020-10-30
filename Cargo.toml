@@ -1,0 +1,24 @@
+[package]
+name = "wasm-bip85"
+version = "0.1.0"
+authors = ["Rita Kitic"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2.68"
+bip85 = { git = "https://github.com/rikitau/rust-bip85.git", features=["mnemonic"] }
+bitcoin = "0.25.0"
+
+[dependencies.web-sys]
+version = "0.3.4"
+features = [
+  'Document',
+  'Element',
+  'HtmlElement',
+  'Node',
+  'Window',
+]
+
