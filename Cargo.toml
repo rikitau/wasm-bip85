@@ -9,16 +9,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wasm-bindgen = "0.2.68"
-bip85 = { git = "https://github.com/rikitau/rust-bip85.git", features=["mnemonic"] }
+bip85 = { git = "https://github.com/rikitau/rust-bip85.git", features=["all-languages"] }
 bitcoin = "0.25.0"
-
-[dependencies.web-sys]
-version = "0.3.4"
-features = [
-  'Document',
-  'Element',
-  'HtmlElement',
-  'Node',
-  'Window',
-]
 

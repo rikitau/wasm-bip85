@@ -2,9 +2,12 @@
 <head>
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
 <style>
-body{
+main{
 	display: flex;
 	flex-direction: column;
+	margin: auto;
+	max-width: 900px;
+	padding: 50px;
 }
 input[type="text"]{
 	max-width: 800px;
@@ -14,22 +17,53 @@ input[type="number"]{
 }
 input{
 	padding: 10px 5px;
-	margin: 10px 0;
+	margin: 10px 0 20px 0;
 }
 </style>
 </head>
 <body>
+<main>
 	<h1>BIP-85 entropy from extended private key</h1>
-	<input type="text" id="xprv" placeholder="Enter your xprv"/>
-	<input type="number" id="index" value="0"/>
+	<label for="xprv">Root key:</label>
+	<input type="text"
+		   id="xprv"
+		   placeholder="Enter your xprv"
+		   value="xprv9s21ZrQH143K2LBWUUQRFXhucrQqBpKdRRxNVq2zBqsx8HVqFk2uYo8kmbaLLHRdqtQpUm98uKfu3vca1LqdGhUtyoFnCNkfmXRyPXLjbKb"
+	/>
+	<label for="index">Derivation index:</label>
+	<input type="number" id="index" value="0" min="0" max="2147483647" step="1"/>
+	<h3>Result:</h3>
 	<div id="wif"></div>
-
+</main>
 
 <script type="module">
-import init from './pkg/wasm_bip85.js';
+import init, { to_wif, to_mnemonic } from './pkg/wasm_bip85.js';
 
 async function run() {
 	await init();
+	update();
+	document.getElementById("xprv")
+	.addEventListener("change", ()=>{
+		update();
+	});
+	document.getElementById("index")
+	.addEventListener("change", ()=>{
+		update();
+	});
+}
+function update(){
+	let xprv = document.getElementById("xprv").value;
+	let idx = parseInt(document.getElementById("index").value);
+	console.log(xprv);
+	try{
+		let wif = to_wif(xprv, idx);
+		document.getElementById("wif").innerHTML = wif;
+	}catch(err){
+		console.log(err);
+		document.getElementById("wif").innerHTML = err;
+	}
+	//console.log(to_mnemonic(xprv, 12, 0));
+	//console.log(to_mnemonic(xprv, 24, 1));
 }
 
 run();
