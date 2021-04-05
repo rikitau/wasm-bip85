@@ -1,0 +1,15 @@
+{
+  "name": "wasm-bip85",
+  "collaborators": [
+    "Rita Kitic"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "wasm_bip85_bg.wasm",
+    "wasm_bip85.js",
+    "wasm_bip85.d.ts"
+  ],
+  "module": "wasm_bip85.js",
+  "types": "wasm_bip85.d.ts",
+  "sideEffects": false
+}
