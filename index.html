@@ -8,6 +8,7 @@ main{
 	margin: auto;
 	max-width: 900px;
 	padding: 50px;
+	font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 }
 input[type="text"]{
 	max-width: 800px;
@@ -19,11 +20,14 @@ input{
 	padding: 10px 5px;
 	margin: 10px 0 20px 0;
 }
+#error{
+	color: #a70000;
+}
 </style>
 </head>
 <body>
 <main>
-	<h1>BIP-85 entropy from extended private key</h1>
+	<h1><a href="https://github.com/bitcoin/bips/blob/master/bip-0085.mediawiki" target="_blank">BIP-85</a> entropy from extended private key</h1>
 	<label for="xprv">Root key:</label>
 	<input type="text"
 		   id="xprv"
@@ -32,12 +36,16 @@ input{
 	/>
 	<label for="index">Derivation index:</label>
 	<input type="number" id="index" value="0" min="0" max="2147483647" step="1"/>
-	<h3>WIF:</h3>
-	<div id="wif"></div>
-	<h3>BIP39 12 words mnemonic:</h3>
-	<div id="bip39-12"></div>
-	<h3>BIP39 24 words mnemonic:</h3>
-	<div id="bip39-24"></div>
+	<div id="result">
+		<h3>WIF:</h3>
+		<div id="wif"></div>
+		<h3>BIP39 12 words mnemonic:</h3>
+		<div id="bip39-12"></div>
+		<h3>BIP39 24 words mnemonic:</h3>
+		<div id="bip39-24"></div>
+	</div>
+	<div id="error">
+	</div>
 </main>
 
 <script type="module">
@@ -62,16 +70,19 @@ function update(){
 	try{
 		let wif = to_wif(xprv, idx);
 		document.getElementById("wif").innerHTML = wif;
-    for (const num_words of [12, 24]) {
-      let bip39 = to_mnemonic(xprv, num_words, idx);
-      document.getElementById(`bip39-${num_words}`).innerHTML = bip39;
-    }
+		for (const num_words of [12, 24]) {
+			let bip39 = to_mnemonic(xprv, num_words, idx);
+			document.getElementById(`bip39-${num_words}`).innerHTML = bip39;
+		}
+		// how result block, hide error
+		document.getElementById("result").style.display = "";
+		document.getElementById("error").style.display = "none";
 	}catch(err){
 		console.log(err);
-		document.getElementById("wif").innerHTML = err;
+		document.getElementById("error").innerHTML = err;
+		document.getElementById("result").style.display = "none";
+		document.getElementById("error").style.display = "";
 	}
-	//console.log(to_mnemonic(xprv, 12, 0));
-	//console.log(to_mnemonic(xprv, 24, 1));
 }
 
 run();
