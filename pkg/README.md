@@ -1,10 +1,10 @@
-# wasm-bip85
+# Wasm-bip85
 
-rust-bip85 in the browser
+[Rust-bip85](https://github.com/rikitau/rust-bip85) in the browser. [Try it out](https://rikitau.github.io/wasm-bip85/)
 
-# build
+# Build
 
-Build with wasm-pack:
+Build with [wasm-pack](https://rustwasm.github.io/wasm-pack/installer/):
 
 ```sh
 wasm-pack build --target web

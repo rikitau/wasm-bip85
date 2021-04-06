@@ -18,13 +18,13 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly to_wif: (a: number, b: number, c: number) => number;
+  readonly rustsecp256k1_v0_2_0_context_preallocated_destroy: (a: number) => void;
+  readonly to_mnemonic: (a: number, b: number, c: number, d: number) => number;
   readonly rustsecp256k1_v0_2_0_ec_pubkey_create: (a: number, b: number, c: number) => number;
   readonly rustsecp256k1_v0_2_0_ec_pubkey_serialize: (a: number, b: number, c: number, d: number, e: number) => number;
   readonly rustsecp256k1_v0_2_0_ec_seckey_verify: (a: number, b: number) => number;
   readonly rustsecp256k1_v0_2_0_ec_seckey_tweak_add: (a: number, b: number, c: number) => number;
-  readonly rustsecp256k1_v0_2_0_context_preallocated_destroy: (a: number) => void;
-  readonly to_wif: (a: number, b: number, c: number) => number;
-  readonly to_mnemonic: (a: number, b: number, c: number, d: number) => number;
   readonly rustsecp256k1_v0_2_0_ec_pubkey_parse: (a: number, b: number, c: number, d: number) => number;
   readonly rustsecp256k1_v0_2_0_ecdsa_recoverable_signature_serialize_compact: (a: number, b: number, c: number, d: number) => number;
   readonly rustsecp256k1_v0_2_0_ecdsa_recoverable_signature_parse_compact: (a: number, b: number, c: number, d: number) => number;

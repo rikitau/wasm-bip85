@@ -1,13 +1,13 @@
 /* tslint:disable */
 /* eslint-disable */
 export const memory: WebAssembly.Memory;
+export function to_wif(a: number, b: number, c: number): number;
+export function rustsecp256k1_v0_2_0_context_preallocated_destroy(a: number): void;
+export function to_mnemonic(a: number, b: number, c: number, d: number): number;
 export function rustsecp256k1_v0_2_0_ec_pubkey_create(a: number, b: number, c: number): number;
 export function rustsecp256k1_v0_2_0_ec_pubkey_serialize(a: number, b: number, c: number, d: number, e: number): number;
 export function rustsecp256k1_v0_2_0_ec_seckey_verify(a: number, b: number): number;
 export function rustsecp256k1_v0_2_0_ec_seckey_tweak_add(a: number, b: number, c: number): number;
-export function rustsecp256k1_v0_2_0_context_preallocated_destroy(a: number): void;
-export function to_wif(a: number, b: number, c: number): number;
-export function to_mnemonic(a: number, b: number, c: number, d: number): number;
 export function rustsecp256k1_v0_2_0_ec_pubkey_parse(a: number, b: number, c: number, d: number): number;
 export function rustsecp256k1_v0_2_0_ecdsa_recoverable_signature_serialize_compact(a: number, b: number, c: number, d: number): number;
 export function rustsecp256k1_v0_2_0_ecdsa_recoverable_signature_parse_compact(a: number, b: number, c: number, d: number): number;
