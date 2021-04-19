@@ -1,6 +1,7 @@
 <html>
 <head>
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<title>BIP-85 entropy from extended private key</title>
 <style>
 main{
 	display: flex;
@@ -22,6 +23,9 @@ input{
 }
 #error{
 	color: #a70000;
+}
+a{
+	color: #0366d6;
 }
 </style>
 </head>
@@ -49,11 +53,19 @@ input{
 </main>
 
 <script type="module">
-import init, { to_wif, to_mnemonic } from './pkg/wasm_bip85.js';
+import init, {
+	to_wif, to_mnemonic,
+	root_from_mnemonic, root_from_wif,
+} from './pkg/wasm_bip85.js';
+
+// small handy function to release the gui
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 async function run() {
 	await init();
-	update();
+	await update();
 	document.getElementById("xprv")
 	.addEventListener("change", ()=>{
 		update();
@@ -63,16 +75,18 @@ async function run() {
 		update();
 	});
 }
-function update(){
+async function update(){
 	let xprv = document.getElementById("xprv").value;
 	let idx = parseInt(document.getElementById("index").value);
 	console.log(xprv);
 	try{
 		let wif = to_wif(xprv, idx);
+		await sleep(1);
 		document.getElementById("wif").innerHTML = wif;
 		for (const num_words of [12, 24]) {
 			let bip39 = to_mnemonic(xprv, num_words, idx);
 			document.getElementById(`bip39-${num_words}`).innerHTML = bip39;
+			await sleep(1);
 		}
 		// how result block, hide error
 		document.getElementById("result").style.display = "";
